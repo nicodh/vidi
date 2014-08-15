@@ -538,7 +538,7 @@ class FieldService implements TcaServiceInterface {
 	 */
 	public function hasMany() {
 		$configuration = $this->getConfiguration();
-		return $this->hasRelation() && ($configuration['maxitems'] > 1 || isset($configuration['foreign_table_field']));
+		return $this->hasRelation() && ($configuration['maxitems'] > 1 || isset($configuration['foreign_table_field'])) || $this->hasRelationManyToMany();
 	}
 
 	/**
@@ -548,7 +548,7 @@ class FieldService implements TcaServiceInterface {
 	 */
 	public function hasOne() {
 		$configuration = $this->getConfiguration();
-		return $this->hasRelation() && $configuration['maxitems'] == 1;
+		return $this->hasRelation() && $configuration['maxitems'] == 1 && !$this->hasRelationManyToMany();
 	}
 
 	/**
